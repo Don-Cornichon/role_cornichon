@@ -1,32 +1,43 @@
-Role Name
+Role Docker CE
 =========
 
-A brief description of the role goes here.
+This role install or desinstall docker-ce
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Work only with CentOS 7
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+**present**: Install docker-ce and enable and start it
+**absent**: Remove Docker-ce, the systemctl conf files and docker yum repository
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
+```yaml
+- name: Ensure that docker is well installed
+  hosts: localhost
+  gather_facts: True
+  become: yes
+  roles:
+    - { role: role_docker, status: present }
+```
+```yaml
+- name: Ensure that docker is well installed
+  hosts: localhost
+  gather_facts: True
+  become: yes
+  roles:
+    - { role: role_docker, status: absent }
+```
 License
 -------
 
@@ -35,4 +46,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Nous
