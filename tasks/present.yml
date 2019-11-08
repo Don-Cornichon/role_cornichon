@@ -1,0 +1,28 @@
+---
+- name: Add repository
+  yum_repository:
+    name: docker-ce-stable
+    description: "Docker YUM repo {{ ansible_distribution_major_version }}"
+    baseurl: "https://download.docker.com/linux/centos/{{ ansible_distribution_major_version }}/$basearch/stable"
+    gpgcheck: no
+
+- name: install absent
+  yum:
+    name: docker
+    state: absent
+    autoremove: yes
+  loop: 
+   - { name: docker }
+   - { name: docker-common }
+
+- name: install docker
+  yum:
+    name: docker-ce
+    state: latest
+
+
+- name: start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes

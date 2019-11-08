@@ -1,0 +1,14 @@
+---
+- name: "check {{ status }}"
+  assert:
+    that:
+      - status is defined
+      - status is string
+      - status is match('present|absent')
+    fail_msg: "fail"
+    success_msg: "reussi"
+
+- include: "{{ status }}.yml"
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"

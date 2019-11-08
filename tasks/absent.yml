@@ -1,0 +1,11 @@
+---
+- name: remove repository
+  yum_repository:
+    name: docker-ce-stable
+    state: absent
+
+- name: absent docker
+  yum:
+    name: docker-ce
+    state: absent
+    autoremove: yes
